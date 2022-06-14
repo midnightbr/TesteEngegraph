@@ -1,0 +1,8 @@
+C:\Users\marco\Documents\CSharp\ws-vs\TesteEngegraph\TesteEngegraph_Console\bin\Debug\TesteEngegraph_Console.exe.config
+C:\Users\marco\Documents\CSharp\ws-vs\TesteEngegraph\TesteEngegraph_Console\bin\Debug\TesteEngegraph_Console.exe
+C:\Users\marco\Documents\CSharp\ws-vs\TesteEngegraph\TesteEngegraph_Console\bin\Debug\TesteEngegraph_Console.pdb
+C:\Users\marco\Documents\CSharp\ws-vs\TesteEngegraph\TesteEngegraph_Console\obj\Debug\TesteEngegraph_Console.csproj.AssemblyReference.cache
+C:\Users\marco\Documents\CSharp\ws-vs\TesteEngegraph\TesteEngegraph_Console\obj\Debug\TesteEngegraph_Console.csproj.SuggestedBindingRedirects.cache
+C:\Users\marco\Documents\CSharp\ws-vs\TesteEngegraph\TesteEngegraph_Console\obj\Debug\TesteEngegraph_Console.csproj.CoreCompileInputs.cache
+C:\Users\marco\Documents\CSharp\ws-vs\TesteEngegraph\TesteEngegraph_Console\obj\Debug\TesteEngegraph_Console.exe
+C:\Users\marco\Documents\CSharp\ws-vs\TesteEngegraph\TesteEngegraph_Console\obj\Debug\TesteEngegraph_Console.pdb

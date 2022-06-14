@@ -1,0 +1,135 @@
+﻿@model Common;
+@{
+    ViewData["Title"] = "Contacts";
+}
+
+<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+    <p>
+        <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#Add">Adicionar</button>
+    </p>
+</div>
+
+<div class="text-center">
+    <h3>Lista de Contatos</h3>
+</div>
+
+<div>
+    <h5>Filtro</h5>
+    <form asp-controller="Contact" asp-action="Index">
+        <p>
+            <select name="column">
+                <option value="Contact">Contatos</option>
+                <option value="Type">Tipo</option>
+            </select>
+            <input type="text" name="search" />
+            <input type="submit" value="Filter" />
+        </p>
+    </form>
+</div>
+
+<div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Data de nascimento</th>
+                <th scope="col">CPF</th>
+                <th scope="col">Sexo</th>
+                <th scope="col">Tipo</th>
+                <th scope="col">Ativo</th>
+            </tr>
+        </thead>
+        <tbody id="tableContact">
+            @if (Model.ListContacts.Any())
+            {
+                foreach (Contact contato in Model.ListContacts)
+                {
+                    <tr>
+                        <th scope="row">@contato.Id</th>
+                        <td>@contato.Nome</td>
+                        <td>@contato.DataNascimento.ToShortDateString()</td>
+                        <td>@contato.Cpf</td>
+                        <td>@contato.Sexo</td>
+                        <td>@contato.Types.Name</td>
+                        @if (contato.Ativo == true)
+                        {
+                            <td>Sim</td>
+                        }
+                        else
+                        {
+                            <td>Não</td>
+                        }
+                        <td>
+                            <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@contato.Id">Edit</a> |
+                            <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@contato.Id">Delete</a>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="modal" id="Add" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Novo Contato</h3>
+            </div>
+
+            <div class="modal-body">
+                <form asp-controller="Contact" asp-action="Create" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="Contact.Nome" class="control-label"></label>
+                        <input asp-for="Contact.Nome" required="" class="form-control" />
+                        <span asp-validation-for="Contact.Nome" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Contact.DataNascimento" class="control-label"></label>
+                        <input type="date" asp-for="Contact.DataNascimento" required="" class="form-control" />
+                        <span asp-validation-for="Contact.DataNascimento" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Contact.Cpf" class="control-label">CPF</label>
+                        <input asp-for="Contact.Cpf" onkeypress="$(this).mask('000.000.000-00');" required="" class="form-control" />
+                        <span asp-validation-for="Contact.Cpf" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Contact.Sexo" class="control-label"></label>
+                        <select asp-for="Contact.Sexo" class="control-label">
+                            <option value="Masculino">Masculino</option>
+                            <option value="Feminino">Feminino</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Contact.TypesId">Tipo</label>
+                        <select class="form-control" asp-for="Contact.TypesId" asp-items="@(new SelectList(Model.ListTypes, "Id", "Name"))">
+                        </select>
+                        <br />
+                        <a type="button" id="addTipo" class="btn btn-info btn-md" asp-controller="Type" asp-action="Index">Não encontrou o tipo?</a>
+                    </div>
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="Contact.Ativo" /> @Html.DisplayNameFor(Model => Model.Contact.Ativo)
+                        </label>
+                    </div>
+
+                    <input type="submit" value="Create" class="btn btn-primary"></input>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                </form>
+
+            </div>
+            <div class="modal-footer">
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }
